@@ -38,10 +38,10 @@ export const portfolioData = {
     about: "Desarrollador Frontend con trayectoria iniciada en 2018, especializado en la creación de interfaces precisas y escalables utilizando Vue 3, TypeScript y arquitecturas modernas. Enfocado en la legibilidad del código y el desarrollo eficiente asistido por IA, con experiencia en migraciones críticas, microfrontends y creación de librerías de componentes UI."
   },
   stats: [
-    { label: "Años de Experiencia", value: "8+" },
-    { label: "Proyectos Completados", value: "20+" },
+    { label: "Años de Experiencia", value: "6+" },
+    { label: "Proyectos Completados", value: "15+" },
     { label: "Tecnologías Dominadas", value: "15+" },
-    { label: "Años con Vue.js", value: "6+" }
+    { label: "Años con Vue.js", value: "5+" }
   ],
   experience: [
     {
