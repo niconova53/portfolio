@@ -3,18 +3,54 @@ import { motion } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
 import { Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
 
+const EMAIL = '89755532638cfeb035e7252fdce35d5a';
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${EMAIL}`;
+
 export const Contact: React.FC = () => {
   const { personal } = portfolioData;
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+  const [sending, setSending] = useState(false);
   const [formData, setFormData] = useState({ name: '', message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', message: '' });
-    }, 4000);
+    setError(false);
+    setSending(true);
+
+    const form = new FormData();
+    form.append('name', formData.name);
+    form.append('message', formData.message);
+    form.append('_subject', `Contacto desde portfolio - ${formData.name}`);
+    form.append('_template', 'table');
+    form.append('_captcha', 'false');
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        body: form,
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      if (data.success === 'true' || data.success === true) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormData({ name: '', message: '' });
+        }, 3000);
+      } else {
+        setError(true);
+      }
+    } catch {
+      // Fallback: abrir el cliente de correo con el mensaje pre-cargado
+      const subject = encodeURIComponent(`Contacto desde portfolio - ${formData.name}`);
+      const body = encodeURIComponent(`${formData.message}\n\n- ${formData.name}`);
+      window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -80,6 +116,7 @@ export const Contact: React.FC = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     className="form-control"
                     required
                     value={formData.name}
@@ -92,6 +129,7 @@ export const Contact: React.FC = () => {
                   <label htmlFor="message">Mensaje</label>
                   <textarea
                     id="message"
+                    name="message"
                     className="form-control"
                     required
                     value={formData.message}
@@ -100,9 +138,15 @@ export const Contact: React.FC = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                  Enviar Mensaje <Send size={16} />
+                <button type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={sending}>
+                  {sending ? 'Enviando...' : 'Enviar Mensaje'} <Send size={16} />
                 </button>
+
+                {error && (
+                  <p style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '0.75rem', textAlign: 'center' }}>
+                    No se pudo enviar. Probá de nuevo.
+                  </p>
+                )}
               </>
             )}
           </form>

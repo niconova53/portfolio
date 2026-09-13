@@ -1,6 +1,6 @@
 import React from 'react';
 import { portfolioData } from '../data/portfolioData';
-import { Globe, Share2, Code, Terminal } from 'lucide-react';
+import { Share2, Code, Terminal } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const { personal } = portfolioData;
@@ -20,9 +20,6 @@ export const Footer: React.FC = () => {
           </a>
           <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="LinkedIn">
             <Share2 size={18} />
-          </a>
-          <a href={personal.twitter} target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Twitter">
-            <Globe size={18} />
           </a>
         </div>
       </div>
