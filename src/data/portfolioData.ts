@@ -33,7 +33,7 @@ export const portfolioData = {
     tagline: "Desarrollador Frontend con trayectoria iniciada en 2018, especializado en la creación de interfaces precisas y escalables utilizando Vue 3, TypeScript y arquitecturas modernas. Enfocado en la legibilidad del código y el desarrollo eficiente asistido por IA.",
     location: "Glew, Buenos Aires, Argentina",
     email: "niconova53@gmail.com",
-    github: "https://github.com",
+    github: "https://github.com/niconova53",
     linkedin: "https://linkedin.com/in/nicolas-novacovich-002211173",
     about: "Desarrollador Frontend con trayectoria iniciada en 2018, especializado en la creación de interfaces precisas y escalables utilizando Vue 3, TypeScript y arquitecturas modernas. Enfocado en la legibilidad del código y el desarrollo eficiente asistido por IA, con experiencia en migraciones críticas, microfrontends y creación de librerías de componentes UI."
   },
