@@ -29,13 +29,13 @@ export interface SkillCategory {
 export const portfolioData = {
   personal: {
     name: "Nicolas Novacovich",
-    title: "Desarrollador Frontend Senior | Especialista en Vue.js & TypeScript",
-    tagline: "Desarrollador Frontend con trayectoria iniciada en 2018, especializado en la creación de interfaces precisas y escalables utilizando Vue 3, TypeScript y arquitecturas modernas. Enfocado en la legibilidad del código y el desarrollo eficiente asistido por IA.",
+    title: "Desarrollador Frontend Senior | Especialista en Vue.js, React & TypeScript",
+    tagline: "Desarrollador Frontend con trayectoria iniciada en 2018, especializado en la creación de interfaces precisas y escalables utilizando Vue 3, React, Next.js, TypeScript y arquitecturas modernas. Enfocado en la legibilidad del código y el desarrollo eficiente asistido por IA.",
     location: "Glew, Buenos Aires, Argentina",
     email: "niconova53@gmail.com",
     github: "https://github.com/niconova53",
     linkedin: "https://linkedin.com/in/nicolas-novacovich-002211173",
-    about: "Desarrollador Frontend con trayectoria iniciada en 2018, especializado en la creación de interfaces precisas y escalables utilizando Vue 3, TypeScript y arquitecturas modernas. Enfocado en la legibilidad del código y el desarrollo eficiente asistido por IA, con experiencia en migraciones críticas, microfrontends y creación de librerías de componentes UI."
+    about: "Desarrollador Frontend con trayectoria iniciada en 2018, especializado en la creación de interfaces precisas y escalables utilizando Vue 3, React, Next.js, TypeScript y arquitecturas modernas. Enfocado en la legibilidad del código y el desarrollo eficiente asistido por IA, con experiencia en migraciones críticas, microfrontends y creación de librerías de componentes UI."
   },
   stats: [
     { label: "Años de Experiencia", value: "6+" },
@@ -146,6 +146,7 @@ export const portfolioData = {
       name: "Frontend & Frameworks",
       skills: [
         { name: "Vue.js (2 & 3)", level: 95 },
+        { name: "React / Next.js", level: 85 },
         { name: "TypeScript / JavaScript (ES6+)", level: 95 },
         { name: "Vue 3 Composition API / Pinia", level: 90 },
         { name: "Next.js / Node.js", level: 85 },

@@ -1,67 +1,32 @@
 import { useEffect, useState } from 'react';
 
 export function CursorGlow() {
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
-  const [isInside, setIsInside] = useState(true);
-
-  const size = 220;
-  const half = size / 2;
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    let hideTimeout: ReturnType<typeof setTimeout>;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouseX(e.clientX);
-      setMouseY(e.clientY);
-
-      // Detectar si realmente está dentro del viewport
-      const isInViewport = e.clientX > 0 && e.clientX < window.innerWidth &&
-                           e.clientY > 0 && e.clientY < window.innerHeight;
-
-      if (isInViewport) {
-        setIsInside(true);
-        clearTimeout(hideTimeout);
-      } else {
-        // Fuera del viewport real - programar ocultación
-        hideTimeout = setTimeout(() => setIsInside(false), 50);
-      }
+    const onMove = (e: MouseEvent) => {
+      setPos({ x: e.clientX, y: e.clientY });
+      if (!visible) setVisible(true);
     };
-
-    const handleMouseLeave = () => setIsInside(false);
-    const handleMouseEnter = () => setIsInside(true);
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
-
+    const onLeave = () => setVisible(false);
+    const onEnter = () => setVisible(true);
+    window.addEventListener('mousemove', onMove, { passive: true });
+    window.addEventListener('mouseleave', onLeave);
+    window.addEventListener('mouseenter', onEnter);
     return () => {
-      clearTimeout(hideTimeout);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('mouseenter', handleMouseEnter);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseleave', onLeave);
+      window.removeEventListener('mouseenter', onEnter);
     };
-  }, []);
+  }, [visible]);
 
-  if (!isInside) return null;
-
-  const style = {
-    position: 'fixed' as const,
-    width: `${size}px`,
-    height: `${size}px`,
-    left: `${mouseX - half}px`,
-    top: `${mouseY - half}px`,
-    borderRadius: '50%',
-    background: 'var(--accent-primary)',
-    filter: 'blur(90px)',
-    opacity: 0.15,
-    pointerEvents: 'none' as const,
-    zIndex: 9999,
-    willChange: 'left, top',
-    transition: 'opacity 0.15s ease',
-  };
-
-  return <div className="cursor-glow" data-testid="cursor-glow" style={style} />;
+  if (!visible) return null;
+  return (
+    <div
+      className="cursor-glow"
+      data-testid="cursor-glow"
+      style={{ left: `${pos.x - 120}px`, top: `${pos.y - 120}px` }}
+    />
+  );
 }

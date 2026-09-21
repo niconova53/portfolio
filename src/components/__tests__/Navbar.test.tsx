@@ -5,18 +5,18 @@ import { Navbar } from '../Navbar';
 describe('Navbar', () => {
   it('renders brand name correctly', () => {
     render(<Navbar />);
-    expect(screen.getByText('Nicolas.Novacovich()')).toBeInTheDocument();
+    expect(screen.getByText('Nicolas Novacovich')).toBeInTheDocument();
   });
 
   it('renders navigation links', () => {
     render(<Navbar />);
-    expect(screen.getByText('Sobre Mí')).toBeInTheDocument();
+    expect(screen.getByText('Sobre mí')).toBeInTheDocument();
     expect(screen.getByText('Experiencia')).toBeInTheDocument();
     expect(screen.getByText('Proyectos')).toBeInTheDocument();
-    expect(screen.getByText('Contacto')).toBeInTheDocument();
+    expect(screen.getByText(/Hablemos/)).toBeInTheDocument();
   });
 
-  it('renders terminal icon', () => {
+  it('renders toggle button', () => {
     render(<Navbar />);
     expect(screen.getByLabelText('Toggle menu')).toBeInTheDocument();
   });
